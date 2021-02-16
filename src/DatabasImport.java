@@ -4,31 +4,69 @@ import java.util.Scanner;
 
 
 public class DatabasImport {
+    Connection conn;
+    Statement stmt;
 
     public DatabasImport() {
         try {
             // Set up connection to database
-            Connection conn = DriverManager.getConnection(
+            conn = DriverManager.getConnection(
                     "jdbc:mysql://" + DatabaseLoginData.DBURL + ":" + DatabaseLoginData.DBPORT + "/" +
                             DatabaseLoginData.DBNAME + "? allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
                     DatabaseLoginData.DBUSER, DatabaseLoginData.DBPASSWORD);
 
             // Setup statement
-            Statement stmt = conn.createStatement();
-            Scanner tgb = new Scanner(System.in);
+            stmt = conn.createStatement();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public String getBodyfromID(int scene) {
+        String strSelect = "select body from story where id = " + scene;
+
+        ResultSet rset = null;
+        try {
+            rset = stmt.executeQuery(strSelect);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Loop through the result set and print
+        try {
+            rset.next();
+            return rset.getString("body");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getLinksfromStoryId(int choices) {
+        String lnkSelect = "select description from links where story_id = " + choices;
+
+        ResultSet rset = null;
+        try {
+            rset = stmt.executeQuery(lnkSelect);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            rset.next();
+            return rset.getString("links");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /*}
+        Scanner tgb = new Scanner(System.in);
             int currentRoom = 1;
 
             while (currentRoom != 0) {
                 // Create query and execute
-                String strSelect = "select body from story where id = " + currentRoom;
-
-                ResultSet rset = stmt.executeQuery(strSelect);
-
-                // Loop through the result set and print
-                while (rset.next()) {
-                    String body = rset.getString("body");
-                    System.out.println(body);
-                }
 
                 strSelect = "select description, targetId from links where storyId = " + currentRoom;
 
@@ -60,8 +98,6 @@ public class DatabasImport {
             // Close conn and stmt
             conn.close();
             stmt.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
-    }
+    }*/
 }

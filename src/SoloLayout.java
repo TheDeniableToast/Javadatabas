@@ -1,11 +1,37 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class SoloLayout {
-    private JLabel title = new JLabel("Soloäventyr");
-    private JTextPane Storytext = new JTextPane();
-    private JButton Button1 = new JButton();
-    private JButton Button2 = new JButton();
-    private JTextPane Option1 = new JTextPane();
-    private JTextPane Option2 = new JTextPane();
-    private JButton Reset = new JButton("Reset");
+
+    public DatabasImport db;
+    public JLabel title = new JLabel("Soloäventyr");
+    public JTextPane Storytext;
+    public JButton Button1;
+    public JButton Button2;
+    public JTextPane Option1;
+    public JTextPane Option2;
+    public JButton Reset;
+    public JLabel Soloäventyr;
+    public JPanel mainPanel;
+
+    public SoloLayout() {
+        db = new DatabasImport();
+        Storytext.setText(db.getBodyfromID(1));
+        Option1.setText(db.getLinksfromStoryId(1));
+        Reset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("SoloLayout");
+        frame.setContentPane(new SoloLayout().mainPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
 }
