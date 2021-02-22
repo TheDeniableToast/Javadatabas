@@ -18,7 +18,8 @@ public class SoloLayout {
     public SoloLayout() {
         db = new DatabasImport();
         Storytext.setText(db.getBodyfromID(1));
-        Option1.setText(db.getLinksfromStoryId(1));
+        Option1.setText(db.getDescriptionfromStoryId(1));
+        Option2.setText(db.getDescriptionfromStoryId(1));
         Reset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

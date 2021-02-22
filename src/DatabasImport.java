@@ -42,7 +42,7 @@ public class DatabasImport {
         return null;
     }
 
-    public String getLinksfromStoryId(int choices) {
+    public String getDescriptionfromStoryId(int choices) {
         String lnkSelect = "select description from links where story_id = " + choices;
 
         ResultSet rset = null;
@@ -54,7 +54,7 @@ public class DatabasImport {
 
         try {
             rset.next();
-            return rset.getString("links");
+            return rset.getString("description");
         } catch (SQLException e) {
             e.printStackTrace();
         }
