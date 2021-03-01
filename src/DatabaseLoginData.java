@@ -1,3 +1,7 @@
+/**
+ * This class tells the program which database to import
+ */
+
 public class DatabaseLoginData {
 
     public static String DBURL = "127.0.0.1";

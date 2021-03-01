@@ -1,3 +1,7 @@
+/**
+ * This class imports the database
+ */
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,6 +12,7 @@ public class DatabasImport {
     Statement stmt;
 
     public DatabasImport() {
+        /**This is the method that imports the database itself*/
         try {
             // Set up connection to database
             conn = DriverManager.getConnection(
@@ -23,6 +28,7 @@ public class DatabasImport {
     }
 
     public String getBodyfromID(int scene) {
+        /**This method makes the story bits appear in the GUI*/
         String strSelect = "select body from story where id = " + scene;
 
         ResultSet rset = null;
@@ -43,6 +49,7 @@ public class DatabasImport {
     }
 
     public String getDescriptionfromStoryId(int choices) {
+        /**This is the method that makes the choices appear in the GUI*/
         String lnkSelect = "select description from links where story_id = " + choices;
 
         ResultSet rset = null;
